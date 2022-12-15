@@ -332,7 +332,7 @@ public class Principal extends javax.swing.JFrame {
                 "Cantidad de fallecidos",
                 datosBarras,
                 PlotOrientation.VERTICAL,
-                true,
+                false,
                 true,
                 false);
         ChartPanel graf = new ChartPanel(grafico_barras);
@@ -350,7 +350,11 @@ public class Principal extends javax.swing.JFrame {
         
         for (MortalityRate a : mortalityRateDAO.all()) {
             if (a.getDisease().equalsIgnoreCase(enfermedad)) {
-                datosLineal.setValue(a.getNumberDeath(), "Enfermedad", Integer.toString(a.getYear()));
+                if (a.getGender().equalsIgnoreCase("Hombre")) {
+                    datosLineal.setValue(a.getNumberDeath(), "Hombre", Integer.toString(a.getYear()));
+                } else if (a.getGender().equalsIgnoreCase("Mujer")) {
+                    datosLineal.setValue(a.getNumberDeath(), "Mujer", Integer.toString(a.getYear()));
+                }
             }
         }
         
